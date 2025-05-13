@@ -18,17 +18,20 @@ start_date = '2014-01-01'
 end_date = '2025-05-12'
 yahoofinance_field = ['Open']
 
-strategy_components_price_data = get_historical_data(strategy_tickers[:10], start_date, end_date, fields=yahoofinance_field)
+strategy_components_price_data = get_historical_data(strategy_tickers, start_date, end_date, fields=yahoofinance_field)
 benchmark_price_data = get_historical_data([benchmark_ticker], start_date, end_date, fields=yahoofinance_field)
 
 # Instantiate your strategy
 lookback_period = 200
+volatility_lookback=20
+risk_per_trade=0.01
+max_position_size=0.05
 
 strategy = TrendFollowingStrategy(
     lookback_period=lookback_period,
-    volatility_lookback=20,
-    risk_per_trade=0.01,
-    max_position_size=0.05
+    volatility_lookback=volatility_lookback,
+    risk_per_trade=risk_per_trade,
+    max_position_size=max_position_size
 )
 
 # Run the backtest
@@ -44,5 +47,17 @@ benchmark_returns = benchmark_price_data[benchmark_price_data.columns[0]].pct_ch
 aligned_returns = align_returns(strategy_returns, benchmark_returns)
 aligned_returns_trimmed = aligned_returns.iloc[lookback_period:]
 
-#generate_strategy_report(aligned_returns_trimmed)
-generate_html_report(aligned_returns_trimmed)
+# Pass additional parameters to generate_html_report
+params = {
+    'strategy_tickers': strategy_tickers,
+    'start_date': start_date,
+    'end_date': end_date,
+    'yahoofinance_field': yahoofinance_field,
+    'lookback_period': lookback_period,
+    'volatility_lookback': volatility_lookback,
+    'risk_per_trade': risk_per_trade,
+    'max_position_size': max_position_size
+}
+
+# Pass position_sizes to generate_html_report
+generate_html_report(aligned_returns_trimmed, params=params, position_sizes=results['position_sizes'])

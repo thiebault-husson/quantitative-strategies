@@ -6,7 +6,9 @@ from reporting.graphs.graphs import (
     performance_annualized_volatility,
     performance_sharpe_ratio,
     performance_max_drawdown,
-    graph_base100
+    graph_base100,
+    plot_portfolio_allocation,
+    plot_cash_vs_invested
 )
 from reporting.graphs.tables import return_summary_table, annualized_return_per_year
 
@@ -14,7 +16,8 @@ def generate_html_report(
     aligned_returns: pd.DataFrame,
     results: dict = None,
     params: dict = None,
-    data_summary: dict = None
+    data_summary: dict = None,
+    position_sizes: pd.DataFrame = None
 ) -> None:
     """
     Generate an HTML report based on the first page of report_format_exemple.html.
@@ -43,6 +46,36 @@ def generate_html_report(
 
     # Generate the graph image
     graph_base100(aligned_returns, filename='reporting/performance_reports/base100_performance.png')
+    # Plot the cash vs invested graph
+    if position_sizes is not None:
+        plot_cash_vs_invested(position_sizes, filename='strategy_portion_invested_overtime.png')
+
+    # Extract parameters from the params dictionary
+    strategy_tickers = params.get('strategy_tickers', [])
+    start_date = params.get('start_date', 'N/A')
+    end_date = params.get('end_date', 'N/A')
+    yahoofinance_field = params.get('yahoofinance_field', ['N/A'])
+
+    # Extract additional strategy parameters from the params dictionary
+    lookback_period = params.get('lookback_period', 'N/A')
+    volatility_lookback = params.get('volatility_lookback', 'N/A')
+    risk_per_trade = params.get('risk_per_trade', 'N/A')
+    max_position_size = params.get('max_position_size', 'N/A')
+
+    # Add strategy summary information
+    strategy_summary = {
+        'Number of Tickers': len(strategy_tickers),
+        'Start Date': start_date,
+        'End Date': end_date,
+        'Prices Used': ', '.join(yahoofinance_field),
+        'Lookback Period': lookback_period,
+        'Volatility Lookback': volatility_lookback,
+        'Risk Per Trade': risk_per_trade,
+        'Max Position Size': max_position_size
+    }
+
+    # Create a DataFrame for the strategy summary
+    strategy_summary_table = pd.DataFrame(list(strategy_summary.items()), columns=['Parameter', 'Value'])
 
     # Create HTML content
     html_content = f"""
@@ -67,11 +100,24 @@ def generate_html_report(
             .grid-item {{
                 margin: 10px;
             }}
+            .summary-container {{
+                margin-bottom: 20px;
+                width: 50%; /* Make the table narrower */
+                text-align: left; /* Align the table to the left */
+            }}
         </style>
     </head>
     <body>
         <h1>Strategy Performance Report</h1>
         <p style="text-align: center;">Generated: {today_str}</p>
+
+        <div class="summary-container">
+            <h2>Strategy Summary</h2>
+            {strategy_summary_table.to_html(classes='table table-striped', index=False, border=0)}
+        </div>
+        <div class="summary-container">
+            <!-- Blank container for additional content or spacing -->
+        </div>
 
         <div class="flex-container">
             <div class="flex-item">
@@ -113,4 +159,3 @@ def generate_html_report(
     with open(html_path, 'w') as f:
         f.write(html_content)
 
-    print(f"Strategy performance HTML report saved to {html_path}")

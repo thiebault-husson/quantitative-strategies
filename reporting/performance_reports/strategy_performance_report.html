@@ -20,11 +20,65 @@
             .grid-item {
                 margin: 10px;
             }
+            .summary-container {
+                margin-bottom: 20px;
+                width: 50%; /* Make the table narrower */
+                text-align: left; /* Align the table to the left */
+            }
         </style>
     </head>
     <body>
         <h1>Strategy Performance Report</h1>
         <p style="text-align: center;">Generated: 2025-05-13</p>
+
+        <div class="summary-container">
+            <h2>Strategy Summary</h2>
+            <table class="dataframe table table-striped">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Parameter</th>
+      <th>Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Number of Tickers</td>
+      <td>503</td>
+    </tr>
+    <tr>
+      <td>Start Date</td>
+      <td>2014-01-01</td>
+    </tr>
+    <tr>
+      <td>End Date</td>
+      <td>2025-05-12</td>
+    </tr>
+    <tr>
+      <td>Prices Used</td>
+      <td>Open</td>
+    </tr>
+    <tr>
+      <td>Lookback Period</td>
+      <td>200</td>
+    </tr>
+    <tr>
+      <td>Volatility Lookback</td>
+      <td>20</td>
+    </tr>
+    <tr>
+      <td>Risk Per Trade</td>
+      <td>0.01</td>
+    </tr>
+    <tr>
+      <td>Max Position Size</td>
+      <td>0.05</td>
+    </tr>
+  </tbody>
+</table>
+        </div>
+        <div class="summary-container">
+            <!-- Blank container for additional content or spacing -->
+        </div>
 
         <div class="flex-container">
             <div class="flex-item">
@@ -44,52 +98,52 @@
   <tbody>
     <tr>
       <th>2015</th>
-      <td>0.61%</td>
+      <td>-0.44%</td>
       <td>-1.03%</td>
     </tr>
     <tr>
       <th>2016</th>
-      <td>8.72%</td>
+      <td>8.49%</td>
       <td>9.27%</td>
     </tr>
     <tr>
       <th>2017</th>
-      <td>14.02%</td>
+      <td>20.19%</td>
       <td>19.52%</td>
     </tr>
     <tr>
       <th>2018</th>
-      <td>1.72%</td>
+      <td>-2.03%</td>
       <td>-7.10%</td>
     </tr>
     <tr>
       <th>2019</th>
-      <td>11.42%</td>
+      <td>15.74%</td>
       <td>28.66%</td>
     </tr>
     <tr>
       <th>2020</th>
-      <td>10.32%</td>
+      <td>8.19%</td>
       <td>16.05%</td>
     </tr>
     <tr>
       <th>2021</th>
-      <td>13.39%</td>
+      <td>24.67%</td>
       <td>27.91%</td>
     </tr>
     <tr>
       <th>2022</th>
-      <td>-6.20%</td>
+      <td>-8.34%</td>
       <td>-19.88%</td>
     </tr>
     <tr>
       <th>2023</th>
-      <td>5.56%</td>
+      <td>7.09%</td>
       <td>25.13%</td>
     </tr>
     <tr>
       <th>2024</th>
-      <td>0.15%</td>
+      <td>11.55%</td>
       <td>23.77%</td>
     </tr>
   </tbody>
@@ -114,13 +168,13 @@
   <tbody>
     <tr>
       <th>Trend Following Strategy</th>
-      <td>0.60%</td>
-      <td>-2.76%</td>
-      <td>-0.92%</td>
-      <td>-0.29%</td>
-      <td>1.65%</td>
-      <td>5.22%</td>
-      <td>5.69%</td>
+      <td>2.59%</td>
+      <td>-5.24%</td>
+      <td>3.29%</td>
+      <td>-3.01%</td>
+      <td>3.78%</td>
+      <td>9.33%</td>
+      <td>7.56%</td>
     </tr>
     <tr>
       <th>^GSPC_Open</th>
@@ -152,11 +206,11 @@
   <tbody>
     <tr>
       <th>Trend Following Strategy</th>
-      <td>4.83%</td>
-      <td>4.81%</td>
-      <td>5.57%</td>
-      <td>5.96%</td>
-      <td>5.91%</td>
+      <td>8.39%</td>
+      <td>8.15%</td>
+      <td>9.62%</td>
+      <td>8.87%</td>
+      <td>8.88%</td>
     </tr>
     <tr>
       <th>^GSPC_Open</th>
@@ -185,11 +239,11 @@
   <tbody>
     <tr>
       <th>Trend Following Strategy</th>
-      <td>-0.17</td>
-      <td>0.36</td>
-      <td>0.94</td>
-      <td>0.96</td>
-      <td>1.00</td>
+      <td>0.43</td>
+      <td>0.50</td>
+      <td>0.98</td>
+      <td>0.87</td>
+      <td>0.95</td>
     </tr>
     <tr>
       <th>^GSPC_Open</th>
@@ -218,11 +272,11 @@
   <tbody>
     <tr>
       <th>Trend Following Strategy</th>
-      <td>-4.85%</td>
-      <td>-4.85%</td>
-      <td>-9.27%</td>
-      <td>-9.27%</td>
-      <td>-9.27%</td>
+      <td>-9.49%</td>
+      <td>-9.49%</td>
+      <td>-10.93%</td>
+      <td>-12.88%</td>
+      <td>-12.88%</td>
     </tr>
     <tr>
       <th>^GSPC_Open</th>

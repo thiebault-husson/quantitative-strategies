@@ -23,6 +23,9 @@ class TrendFollowingStrategy(BaseStrategy):
             volatility = returns.rolling(window=self.volatility_lookback).std()
             position_sizes[ticker] = self.risk_per_trade / volatility
             position_sizes[ticker] = position_sizes[ticker].clip(0, self.max_position_size)
+        # Normalize row if the sum exceeds 100%
+        row_sums = position_sizes.sum(axis=1)
+        position_sizes = position_sizes.div(row_sums, axis=0).where(row_sums > 1, position_sizes)
         return position_sizes * signals
 
     def calculate_returns(self, prices: pd.DataFrame, signals: pd.DataFrame, position_sizes: pd.DataFrame) -> pd.Series:

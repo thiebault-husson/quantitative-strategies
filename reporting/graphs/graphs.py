@@ -2,6 +2,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 from reporting.performance_metrics.calculate_performance_metrics import PerformanceAnalytics
 import numpy as np
+import os
 
 def plot_portfolio_value(portfolio_values, filename='portfolio_value.png'):
     plt.figure(figsize=(12, 6))
@@ -93,3 +94,68 @@ def graph_base100(df, filename='base100_performance.png'):
     plt.tight_layout()
     plt.savefig(filename)
     plt.close()
+
+def plot_portfolio_allocation(position_sizes, filename='strategy_allocation_overtime.png'):
+    """
+    Plot a stacked area chart showing the portfolio allocation over time.
+    
+    Args:
+        position_sizes (pd.DataFrame): DataFrame with columns representing different positions.
+        filename (str): File name to save the plot.
+    """
+    # Ensure the directory exists
+    os.makedirs('reporting/performance_reports', exist_ok=True)
+    
+    # Calculate the percentage allocation for each position
+    percentage_allocation = position_sizes.copy()
+    
+    # Calculate cash as 1 minus the sum of position sizes
+    percentage_allocation['Cash'] = 1 - position_sizes.sum(axis=1)
+    
+    # Convert to percentage
+    percentage_allocation *= 100
+    
+    # Plot the stacked area chart
+    plt.figure(figsize=(12, 6))
+    plt.stackplot(percentage_allocation.index, percentage_allocation.T, labels=percentage_allocation.columns)
+    plt.title('Portfolio Allocation Over Time')
+    plt.xlabel('Date')
+    plt.ylabel('Percentage of Portfolio (%)')
+    plt.legend(loc='upper left')
+    plt.tight_layout()
+    plt.savefig(os.path.join('reporting/performance_reports', filename))
+    plt.close()
+
+def plot_cash_vs_invested(position_sizes, filename='strategy_portion_invested_overtime.png'):
+    """
+    Plot a stacked area chart showing the percentage of cash vs invested over time.
+    
+    Args:
+        position_sizes (pd.DataFrame): DataFrame with columns representing different positions.
+        filename (str): File name to save the plot.
+    """
+    # Ensure the directory exists
+    os.makedirs('reporting/performance_reports', exist_ok=True)
+    
+    # Calculate the percentage of invested
+    invested_percentage = position_sizes.sum(axis=1)
+    
+    # Calculate cash as 1 minus the invested percentage
+    cash_percentage = 1 - invested_percentage
+    
+    # Create a DataFrame for plotting
+    data = pd.DataFrame({'Invested': invested_percentage, 'Cash': cash_percentage}) * 100
+    
+    # Plot the stacked area chart
+    plt.figure(figsize=(12, 6))
+    plt.stackplot(data.index, data.T, labels=data.columns)
+    plt.title('Cash vs Invested Over Time')
+    plt.xlabel('Date')
+    plt.ylabel('Percentage of Portfolio (%)')
+    plt.legend(loc='upper left')
+    plt.tight_layout()
+    plt.savefig(os.path.join('reporting/performance_reports', filename))
+    plt.close()
+
+
+
