@@ -1,0 +1,215 @@
+
+    <html>
+    <head>
+        <title>Strategy Performance Report</title>
+        <style>
+            body { font-family: Arial, sans-serif; }
+            h1 { text-align: center; }
+            .flex-container { display: flex; justify-content: space-between; margin: 20px 0; }
+            .flex-item { flex: 1; margin: 10px; }
+            .flex-item-table { flex: 0.5; margin: 10px; }  /* Smaller flex for the table */
+            table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+            th, td { border: 1px solid #ddd; padding: 8px; text-align: center; }
+            th { background-color: #f2f2f2; }
+            .grid-container {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 20px;
+                margin: 20px 0;
+            }
+            .grid-item {
+                margin: 10px;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Strategy Performance Report</h1>
+        <p style="text-align: center;">Generated: 2025-05-13</p>
+
+        <div class="flex-container">
+            <div class="flex-item">
+                <h2>Cumulative Performance (Base 100)</h2>
+                <img src="base100_performance.png" alt="Cumulative Performance Graph" style="width: 100%;">
+            </div>
+            <div class="flex-item-table">
+                <h2>Annualized Return Per Year</h2>
+                <table class="dataframe table table-striped">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Trend Following Strategy</th>
+      <th>^GSPC_Open</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2021</th>
+      <td>13.39%</td>
+      <td>27.91%</td>
+    </tr>
+    <tr>
+      <th>2022</th>
+      <td>-6.20%</td>
+      <td>-19.88%</td>
+    </tr>
+    <tr>
+      <th>2023</th>
+      <td>5.56%</td>
+      <td>25.13%</td>
+    </tr>
+    <tr>
+      <th>2024</th>
+      <td>0.15%</td>
+      <td>23.77%</td>
+    </tr>
+  </tbody>
+</table>
+            </div>
+        </div>
+
+        <h2>Return Summary Table</h2>
+        <table class="dataframe table table-striped">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>1 Mo</th>
+      <th>3 Mo</th>
+      <th>1 Yr</th>
+      <th>YTD</th>
+      <th>3 Yr (Ann)</th>
+      <th>5 Yr (Ann)</th>
+      <th>10 Yr (Ann)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Trend Following Strategy</th>
+      <td>0.60%</td>
+      <td>-2.76%</td>
+      <td>-0.92%</td>
+      <td>-0.29%</td>
+      <td>1.65%</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>^GSPC_Open</th>
+      <td>14.39%</td>
+      <td>-6.63%</td>
+      <td>9.49%</td>
+      <td>-4.06%</td>
+      <td>10.75%</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+
+        <div class="grid-container">
+            <div class="grid-item">
+                <h2>Annualized Volatility</h2>
+                <table class="dataframe table table-striped">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>1 Yr (Ann)</th>
+      <th>3 Yr (Ann)</th>
+      <th>5 Yr (Ann)</th>
+      <th>10 Yr (Ann)</th>
+      <th>Since 2020-10-16</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Trend Following Strategy</th>
+      <td>4.83%</td>
+      <td>4.81%</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>5.25%</td>
+    </tr>
+    <tr>
+      <th>^GSPC_Open</th>
+      <td>19.44%</td>
+      <td>17.59%</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>16.68%</td>
+    </tr>
+  </tbody>
+</table>
+            </div>
+            <div class="grid-item">
+                <h2>Sharpe Ratio</h2>
+                <table class="dataframe table table-striped">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>1 Yr (Ann)</th>
+      <th>3 Yr (Ann)</th>
+      <th>5 Yr (Ann)</th>
+      <th>10 Yr (Ann)</th>
+      <th>Since 2020-10-16</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Trend Following Strategy</th>
+      <td>-0.17</td>
+      <td>0.36</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>0.70</td>
+    </tr>
+    <tr>
+      <th>^GSPC_Open</th>
+      <td>0.56</td>
+      <td>0.67</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>0.74</td>
+    </tr>
+  </tbody>
+</table>
+            </div>
+            <div class="grid-item">
+                <h2>Max Drawdown</h2>
+                <table class="dataframe table table-striped">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>1 Yr (Ann)</th>
+      <th>3 Yr (Ann)</th>
+      <th>5 Yr (Ann)</th>
+      <th>10 Yr (Ann)</th>
+      <th>Since 2020-10-16</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Trend Following Strategy</th>
+      <td>-4.85%</td>
+      <td>-4.85%</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>-9.27%</td>
+    </tr>
+    <tr>
+      <th>^GSPC_Open</th>
+      <td>-19.25%</td>
+      <td>-19.25%</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>-26.73%</td>
+    </tr>
+  </tbody>
+</table>
+            </div>
+        </div>
+
+        <footer style="text-align: right; font-size: 0.8em; color: gray;">
+            Generated: 2025-05-13
+        </footer>
+    </body>
+    </html>
+    

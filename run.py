@@ -1,12 +1,12 @@
 import pandas as pd
 from strategies.trend_following import TrendFollowingStrategy
 from backtest.engine import BacktestEngine
-from reporting.generate_report import generate_strategy_report
 from reporting.performance_metrics.calculate_performance_metrics import align_returns
 from data.index_components import get_sp500_tickers
 import numpy as np
 from data.historical_data import get_historical_data
 from reporting.graphs.graphs import performance_gross_returns, performance_annualized_volatility, performance_sharpe_ratio, performance_max_drawdown
+from reporting.generate_html_report import generate_html_report
 
 # Get tickers to be used in strategy
 strategy_tickers = get_sp500_tickers()
@@ -44,4 +44,5 @@ benchmark_returns = benchmark_price_data[benchmark_price_data.columns[0]].pct_ch
 aligned_returns = align_returns(strategy_returns, benchmark_returns)
 aligned_returns_trimmed = aligned_returns.iloc[lookback_period:]
 
-generate_strategy_report(aligned_returns_trimmed)
+#generate_strategy_report(aligned_returns_trimmed)
+generate_html_report(aligned_returns_trimmed)
